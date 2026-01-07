@@ -1,5 +1,4 @@
-from python:3.7-alpine3.8
-RUN apk add --no-cache gcc musl-dev
+FROM ghcr.io/astral-sh/uv:python3.13-bookworm
+WORKDIR /app
 COPY . /app
-RUN cd /app && \
-        pip install -e .[tests]
+RUN uv sync --locked

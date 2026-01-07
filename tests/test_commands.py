@@ -1,3 +1,4 @@
+from os import getenv
 from contextlib import nullcontext as does_not_raise
 import math
 import pytest
@@ -15,9 +16,9 @@ pytestmark = pytest.mark.asyncio
 
 async def test_client_init():
     with does_not_raise():
-        _client = await Client.create(host="localhost", port=1491, password="SecretPassword")
+        _client = await Client.create(host=getenv('SONIC_HOST', 'localhost'), port=1491, password="SecretPassword")
     with pytest.raises(ConnectionClosed):
-        _client = await Client.create(host="localhost", port=1491, password="invalid")
+        _client = await Client.create(host=getenv('SONIC_HOST', 'localhost'), port=1491, password="invalid")
 
 async def test_ping(search, ingest):
     assert await search.ping() == b'PONG'

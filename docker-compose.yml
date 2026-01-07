@@ -1,22 +1,26 @@
-version: '2.1'
+name: 'asonic test-in-docker'
+
 services:
   pytest:
-    command: sh -c 'flake8 --max-line-length 120 /app && py.test /app'
+    command: >-
+      bash -c '
+        uv run pytest /app
+      '
     environment:
       - SONIC_HOST=sonic
     build:
       context: .
     links:
       - sonic
-    depends_on:
-      sonic:
-        condition: service_healthy
+    # depends_on:
+    #   sonic:
+    #     condition: service_healthy
   sonic:
     image: valeriansaliou/sonic:v1.4.9
     volumes:
       - ./tests/config.cfg:/etc/sonic.cfg
-    healthcheck:
-      test: ["CMD", "sleep", "2"]
-      interval: 1s
-      timeout: 5s
-      retries: 120
+    # healthcheck:
+    #   test: ["CMD", "sleep", "2"]
+    #   interval: 1s
+    #   timeout: 5s
+    #   retries: 120

@@ -1,0 +1,25 @@
+[project]
+name = "asonic"
+version = "2.0.1"
+authors = [
+    { name = "Moshe Zada" }
+]
+description = "Async python client for Sonic database"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = []
+classifiers = ["Private :: Do Not Upload"]
+license = 'MPL-2.0'
+license-files = ["LICENSE.md"]
+keywords = ['asonic', 'sonic', 'search', 'asyncio', 'async', 'text']
+
+[dependency-groups]
+dev = [
+    'pytest', 
+    'pytest-asyncio', 
+    'flake8',
+]
+
+[build-system]
+requires = ["uv_build>=0.9.13,<0.10.0"]
+build-backend = "uv_build"
